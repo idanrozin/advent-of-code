@@ -4,7 +4,9 @@ const TARGET = 2020;
 const sum2To2020 = (numbers, targetNumber = TARGET) => {
 	let currentNumber;
 	let matching = null;
+	numbers.sort((a,b) => a - b);
 	for (let i = 0; i < numbers.length; i++) {
+		if (i < numbers.length - 1 && numbers[i] +numbers[i + 1] > targetNumber) break;
 		currentNumber = numbers[i];
 		const reducedNumbers = numbers.slice(i);
   
