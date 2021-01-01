@@ -1,4 +1,4 @@
-import { getNumArrayFromInput } from '../common/read-inputs.js';
+import { getNumArrayFromInput } from '../utils/read-inputs.js';
 
 const TARGET = 2020;
 const sum2To2020 = (numbers, targetNumber = TARGET) => {
