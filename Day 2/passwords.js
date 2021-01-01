@@ -1,4 +1,4 @@
-import { getArrayFromInput } from '../utils/read-inputs.js';
+import { getStringArrayFromInput } from '../utils/read-inputs.js';
 
 const sanitizePasswords = passwordsArray => passwordsArray.map(password => {
     if (!password) return;
@@ -47,7 +47,7 @@ const getValidPasswords2 = passArray => passArray.filter(({ min, max, letter, pa
     )
 );
 
-const passwords = getArrayFromInput('input.txt').filter(p => p);
+const passwords = getStringArrayFromInput('input.txt').filter(p => p);
 const policyFormmatedArray = sanitizePasswords(passwords);
 console.log('only Valids for first policy', getValidPasswords1(policyFormmatedArray).length);
 console.log('only Valids for second policy', getValidPasswords2(policyFormmatedArray).length);
