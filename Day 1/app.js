@@ -1,4 +1,4 @@
-import { getNumArrayFromInput } from '../utils/read-inputs.js';
+const utils = require('../utils/read-inputs.js');
 
 const TARGET = 2020;
 const sum2To2020 = (numbers, targetNumber = TARGET) => {
@@ -37,7 +37,7 @@ const sum3To2020 = numbers => {
 	return product;
 };
 
-const numbers = getNumArrayFromInput('input.txt');
+const numbers = utils.getNumArrayFromInput('input.txt');
 
 console.log("result", sum2To2020(numbers));
 console.log("result", sum3To2020(numbers));

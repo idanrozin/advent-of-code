@@ -1,4 +1,4 @@
-import { getStringArrayFromInput } from '../utils/read-inputs.js';
+const utils = require('../utils/read-inputs.js');
 const TRAVERSE_DIRECTIONS = [ [ 1,1 ],[ 3,1 ],[ 5,1 ],[ 7,1 ],[ 1,2 ] ];
 
 const TREE = '#';
@@ -7,7 +7,7 @@ const getTreesOnSlopeByDirection = (rows, right, down) => rows.map((row, i) =>
     i % down == 0 && 
     row[((i / down) * right) % row.length] === TREE).filter(item => item);
 
-const data = getStringArrayFromInput('input.txt');
+const data = utils.getStringArrayFromInput('input.txt');
 const rows = data.map(row => row.split(''));
 
 console.log('First Question:', getTreesOnSlopeByDirection(rows, TRAVERSE_DIRECTIONS[1][0], TRAVERSE_DIRECTIONS[1][1]).length);
