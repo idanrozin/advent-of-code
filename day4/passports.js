@@ -71,7 +71,7 @@ const arrangePassports = data => {
         if (attributes === '') {
             allPassports.push(utils.flattenArray(passport));
             // after pushing to allPassports array empty sub array for next iteration.
-            passport.splice(0,passport.length);
+            passport.splice(0, passport.length);
         } else {
             passport.push(attributes.split(' '));
         }
@@ -79,39 +79,37 @@ const arrangePassports = data => {
     return allPassports;
 };
 
-// filter only the passports that have 8 array members (each index is 1 attr).
-// or if the passport has exactly 7 members then validate that none of the indices have a key that is called 'cid'
-const validatePassportsByNumberOfAttributes = passports => passports.filter(attrs => (attrs.length === 8) || (attrs.length === 7 && attrs.every(at => !('cid' in at))));
+// filter only the passports that have 8 keys (attributes) 
+// or if the passport has exactly 7 keys, then validate that none of the keys 'cid'
+const validatePassportsByNumberOfAttributes = passports => passports.filter(attrs => 
+    (Object.keys(attrs).length === 8) || 
+    (Object.keys(attrs).length === 7 && Object.keys(attrs).every(key => key !== 'cid')));
 
 /**
- * gets an array of passports (each passport is an array of itself) and turns on to an array of objects [ { attr: value }, { attr: value } ]
+ * gets an array of passports (each passport is an array of itself) and turns it to a single flat array of objects [ { attr: value }, { attr: value } ] 
+ * in which every object in the array is a passport
  * @param {array[]} passports 
  */
 const getArrayAsObjectsArray = passports => {
     const allPassportsKeyValue = [];
     passports.forEach(pass => {
         allPassportsKeyValue.push(
-            pass.map(p => {
-                const [k,v] = p.split(':');
-                return { [k] : v };
-            })
-        );
+            pass.reduce(
+                (acc, val) => ({ ...acc, [ val.substr(0, val.indexOf(':')) ]: val.substr(val.indexOf(':') + 1, val.length) }), {})
+            );
     });
     return allPassportsKeyValue;
 };
 
 /**
- * gets a passport (array of objects) and for each object gets the key. 
- * if the key then goes to the validator object and according to the key return the validator result
- * if all true. the array will remain the same size in which was at the beginning which means the passport is valid and function will return true
+ * gets a passport (array of objects) and for each object gets its key. 
+ * for each passport in the array, get it keys and make sure every key is passing validation. if not, every will return false to filter and filter will filter the passport out
+ *
  * @param {object[]} passport
  */
-const validatePassportsByAttributesValues = passport => {
-    const originalSize = passport.length;
-    const filtered = passport.filter(attribute => {
-        const _key = Object.keys(attribute)[0];
+const validatePassportsByAttributesValues = passport => passport.filter(attribute => 
+    Object.keys(attribute).every( _key => {
         if (_key === 'hgt') {
-            
             const val = attribute[_key];
             if (!val.includes('cm') && !val.includes('in')) return false;
             const sliceLength  = val.length - 2;
@@ -123,15 +121,13 @@ const validatePassportsByAttributesValues = passport => {
             return VALIDATORS[_key].validate(attribute[_key]);
         }
     })
-    return filtered.length === originalSize;
-};
-
+);
+   
 const data = utils.getStringArrayFromInput('input.txt');
 const orderedPassports = arrangePassports(data);
+
 const passportsObjectArrays = getArrayAsObjectsArray(orderedPassports);
 const justValids = validatePassportsByNumberOfAttributes(passportsObjectArrays)
 console.log('Result of question #1: only valid passports with 8 attributes or 7 missing `cid`:', justValids.length);
-
-// filter by only the true results
-const allAttributesValuesValid = justValids.filter(passport => validatePassportsByAttributesValues(passport));
+const allAttributesValuesValid = validatePassportsByAttributesValues(justValids);
 console.log('Result of question #2: only valid passports with all attributes values are valid by certain rules:', allAttributesValuesValid.length);
