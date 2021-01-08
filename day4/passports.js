@@ -6,7 +6,8 @@ const getValidPassports = data => {
     let passport = [];
     data.forEach(attributes => {
         if (attributes === '') {
-            allPassports.push(passport.flat().map(str => str.substr(0, str.indexOf(':'))));
+            // allPassports.push(passport.flat().map(str => str.substr(0, str.indexOf(':'))));
+            allPassports.push(utils.flattenArray(passport).map(str => str.substr(0, str.indexOf(':'))));
             passport = [];
         } else {
             passport.push(attributes.split(' '));
