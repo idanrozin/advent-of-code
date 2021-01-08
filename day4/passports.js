@@ -1,4 +1,4 @@
-import { getStringArrayFromInput } from '../utils/read-inputs.js';
+const utils = require('../utils/read-inputs.js');
 
 const getValidPassports = data => {
     const allPassports = [];
@@ -13,5 +13,5 @@ const getValidPassports = data => {
     });
     return allPassports.filter(passport => passport.length === 8 || (passport.length === 7 && !passport.includes('cid')));
 };
-const data = getStringArrayFromInput('input.txt');
+const data = utils.getStringArrayFromInput('input.txt');
 console.log('onlyValids.length', getValidPassports(data).length);
