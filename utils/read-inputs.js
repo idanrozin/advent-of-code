@@ -1,8 +1,11 @@
-import { readFileSync } from 'fs';
+const fs = require('fs');
 
-export const readInput = fileName => readFileSync(fileName, 'utf8');
-export const getStringArrayFromInput = (fileName) => readInput(fileName).split(/\r?\n/);
-export const getNumArrayFromInput = (fileName) => getStringArrayFromInput(fileName).map(str => Number(str));
+const _readInput = fileName => fs.readFileSync(fileName, 'utf8');
+const getStringArrayFromInput = (fileName) => _readInput(fileName).split(/\r?\n/);
+const getNumArrayFromInput = (fileName) => getStringArrayFromInput(fileName).map(str => Number(str));
+
+module.exports.getStringArrayFromInput = getStringArrayFromInput;
+module.exports.getNumArrayFromInput = getNumArrayFromInput;
     
 
     
