@@ -1,3 +1,4 @@
+/* https://adventofcode.com/2020/day/1 */
 const utils = require('../utils/read-inputs.js');
 
 const TARGET = 2020;

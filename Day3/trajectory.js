@@ -1,3 +1,4 @@
+/* https://adventofcode.com/2020/day/3 */
 const utils = require('../utils/read-inputs.js');
 const TRAVERSE_DIRECTIONS = [ [ 1,1 ],[ 3,1 ],[ 5,1 ],[ 7,1 ],[ 1,2 ] ];
 
