@@ -1,3 +1,4 @@
+/* https://adventofcode.com/2020/day/2 */
 const utils = require('../utils/read-inputs.js');
 
 const sanitizePasswords = passwordsArray => passwordsArray.map(password => {
