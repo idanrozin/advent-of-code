@@ -1,3 +1,4 @@
+/* https://adventofcode.com/2020/day/5 */
 const utils = require('../utils/read-inputs.js');
 
 const LOWEST_ROW_VALUE = 0;
@@ -12,6 +13,15 @@ const decryptSeat = (str, low, high, lowerHalfLetter) => {
     return Math.floor((low + high) / 2);
 }
 
+const findMissingSeat = allPlaneTkts => {
+    for (let i = 1; i < allPlaneTkts.sort((a, b) => a - b).length; i++) {
+        if (allPlaneTkts[i] - allPlaneTkts[i-1] === 2) {
+            return ((allPlaneTkts[i] + allPlaneTkts[i-1]) / 2);
+        }
+    }
+}
+
+
 const seats = utils.getStringArrayFromInput('input.txt');
 const allPlaneTkts = [];
 seats.forEach(seat => {
@@ -20,3 +30,4 @@ seats.forEach(seat => {
     allPlaneTkts.push((row * 8 ) + col);
 })
 console.log(Math.max(...allPlaneTkts));
+console.log(findMissingSeat(allPlaneTkts));
