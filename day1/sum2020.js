@@ -17,8 +17,6 @@ const sum2To2020 = (numbers, targetNumber = TARGET) => {
 	  	}  
 	}
 	if (matching && currentNumber) {
-		// console.log("$$$ matching", matching);
-		// console.log("$$$ currentNumber", currentNumber);
 		return matching * currentNumber;
 	}
 };
@@ -29,8 +27,6 @@ const sum3To2020 = numbers => {
 	 numbers.forEach((element, i) => {
 		const result = sum2To2020(numbers.slice(i), TARGET - element);
 		if (result) {
-            // console.log("$$$ currentNumber", element);
-            // console.log("$$$ currentNumber", result);
 			product = result * element;
 			return;
 		}
