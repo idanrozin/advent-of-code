@@ -16,7 +16,7 @@ const findDefectedNumberInStream = numbers => {
     return target;
 };
 
-const findConsequtiveSum = (data, faultNum) => {
+const findConsecutiveSum = (data, faultNum) => {
     let iterations = 0;
     let sum = 0;
     let sumNumbers = []; 
@@ -40,4 +40,4 @@ const findConsequtiveSum = (data, faultNum) => {
 const data = utils.getNumArrayFromInput('input.txt');
 const defectedNum = findDefectedNumberInStream(data);
 console.log('Question 1 Answer:', defectedNum);
-console.log('Question 2 Answer:', findConsequtiveSum(data, defectedNum));
+console.log('Question 2 Answer:', findConsecutiveSum(data, defectedNum));
