@@ -1,4 +1,4 @@
-/* https://adventofcode.com/2020/day/7 */
+/* https://adventofcode.com/2020/day/8 */
 const utils = require('../utils/read-inputs.js');
 
 const GAME_INSTRUCTIONS = {
