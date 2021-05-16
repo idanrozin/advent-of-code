@@ -35,53 +35,23 @@ const modelLayoutIteration = (arr) => {
                 }
             } else {
                 let occupiedCounter = 0;
-                //up
-                if (up === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                // right
-                if (right === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                //down
-                if (down === OCCUPIED) {
-                    occupiedCounter++;
-                }
+                const change = [
+                    up,
+                    right,
+                    down,
+                    left,
+                    diagonalUpRight,
+                    diagonalDownRight,
+                    diagonalDownleft,
+                    diagonalUpleft
+                ].some(adj => adj === OCCUPIED && ++occupiedCounter >= 4);
                 
-                //left
-                if (left === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                //diagonal up right
-                if (diagonalUpRight === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                //diagonal down right
-                if (diagonalDownRight === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                //diagonal down left
-                if (diagonalDownleft === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                //diagonal up left
-                if (diagonalUpleft === OCCUPIED) {
-                    occupiedCounter++;
-                }
-        
-                if (occupiedCounter >= 4) {
+                if (change) {
                     arrChanged = true;
                     arr[i][j] = EMPTY;
                 }
             }
         }
-        
     }
     return arrChanged;
 }
